@@ -1,0 +1,88 @@
+
+
+<aside class="col-md-4">
+    <!-- Search Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Search</h5>
+        <div class="card-body">
+            <form class="input-group" method="GET" action="{% url 'index' %}">
+                <input type="text" class="form-control" placeholder="Search for ..." name="q"/>
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+                    検索
+                </button>
+            </form>
+        </div>
+    </div>
+  
+    <!-- Categories Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Categories</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        {% for category in category_list %}
+                        
+                            {% if not forloop.counter|divisibleby:"2" %}
+                                <li>
+                                    <a class="category-link "href="{% url 'category' category %}">{{ category }}({{ category.num_posts }})</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        {% for category in category_list %}
+                            {% if forloop.counter|divisibleby:"2" %}         
+                                <li>
+                                    <a class="category-link" href="{% url 'category' category %}">
+                                        {{ category }}({{ category.num_posts }})
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tags Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Tags</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        {% for tag in tag_list %}
+                            {% if not forloop.counter|divisibleby:"2" %}
+                                <li>
+                                    <a class="tag-link" href="{% url 'tag' tag %}">
+                                        {{ tag }}({{ tag.num_posts }})
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        {% for tag in tag_list %}
+                            {% if forloop.counter|divisibleby:"2" %}         
+                                <li>
+                                    <a class="tag-link" href="{% url 'tag' tag %}">
+                                        {{ tag }}({{ tag.num_posts }})
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+  

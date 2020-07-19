@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1 class="pb-4 mb-3">かっちゃんのBlog</h1>
+    {% for post in posts %}
+        <div class="card post-card">
+
+            {% if post.thumnail %}
+            <img class="card-img-top" src="{{ post.thumnail.url }}" alt="Card image cap">
+            {% endif %}
+            
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text">
+                    {{ post.content|truncatechars:100}}
+                </p>
+                <a href="{% url 'detail' post.pk %}" class="btn btn-primary">続きを読む &rarr;</a>
+            </div>
+
+            <div class="card-footer text-muted">
+                作成日｜{{ post.created_at }}
+            </div>
+
+        </div>
+    {% endfor %}
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for page in paginator.page_range %}
+                <li{% if page == page_obj.number %} class="page-item" {% endif %}><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <a href="{% url 'create'  %}" class="btn btn-primary">新規作成</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

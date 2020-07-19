@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="mb-4">かっちゃんのBlog</h1>
+    <div class="col-md-12">
+        <!-- Title -->
+        <h1 class="mt-4">{{ post.title }}</h1>
+        <hr />
+        <!-- Date/Time -->
+        <p>{{ post.created_at }}</p>
+        <hr />
+        <!-- Preview Image -->
+        {% if post.image %}
+            <img class="img-fluid rounded" src="{{ post.image.url }}" alt="content_image"/> 
+        {% endif %}
+        <hr />
+        <!-- Post Content -->
+        <p class="text">
+            {{ post.content}}
+        </p>
+        <hr />
+        {% if user.is_authenticated %}
+            <div class="card-footer">
+                <a class="btn btn-primary" href="{% url 'update' post.pk %}">修正</a>
+                <a class="btn btn-danger" href="{% url 'delete' post.pk %}">削除</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

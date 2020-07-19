@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'ka_kun_blog/css/style.css' %}"/>
+        
+        <title>ka_kun_blog</title>
+    </head>
+    
+    <body>
+        {% include "navi.html" %} 
+            <div class="container">
+                {% if messages %}
+                    <ul class="messages_ul" style="margin-top: 1rem;">
+                        {% for message in messages %}
+                            <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                <div class="row">
+                    <main class="col-12 col-md-8">
+                        {% block content %} {% endblock %}
+                    </main>
+                    {% include "sidebar.html" %}
+                </div>
+            </div>
+            
+            <footer style="background-color: black; padding:30px 0px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <ul class="menu">
+                                <span class="contact-form">
+                                    Menu
+                                </span>
+                                <li class="contact-list">
+                                    <a class="contact-link" href="{% url 'index' %}">
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <ul class="address">
+                                <span class="contact-form">
+                                    Contact
+                                </span>
+                                <li class="contact-list">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a class="contact-link" href="mailto:models.innpy@gmail.com" target="_blank">
+                                        Email
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="copyright">
+                    © Copyright 2020 katsuhiko All rights reserved.
+                </p>
+            </footer>
+            
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
