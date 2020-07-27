@@ -3,3 +3,4 @@
 media/images
 __pycache__
 db.sqlite3
+.vscode
